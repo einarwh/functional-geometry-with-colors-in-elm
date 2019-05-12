@@ -19,7 +19,7 @@ main =
     lens = (box, Blackish)
     fish = createPicture fishShapes
   in     
-    lens |> fish 
+    lens |> squareLimit 4 fish 
          |> toSvgWithBoxes (500, 500) [ box ]
          |> decorate
  
