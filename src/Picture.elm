@@ -56,15 +56,27 @@ quartet nw ne sw se =
   above (beside nw ne)
         (beside sw se)
 
+row : List Picture -> Picture 
+row ps = 
+  case ps of 
+    [] -> blank
+    h :: t -> besideRatio 1 (List.length ps - 1) h (row t)
+
+col : List Picture -> Picture   
+col ps = 
+  case ps of 
+    [] -> blank
+    h :: t -> aboveRatio 1 (List.length ps - 1) h (col t)
+
 nonet : Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture
 nonet nw nm ne mw mm me sw sm se =
   let
-    row w m e = besideRatio 1 2 w (beside m e)
-    col n m s = aboveRatio 1 2 n (above m s)
+    rw w m e = besideRatio 1 2 w (beside m e)
+    cl n m s = aboveRatio 1 2 n (above m s)
   in
-    col (row nw nm ne)
-        (row mw mm me)
-        (row sw sm se)
+    cl (rw nw nm ne)
+       (rw mw mm me)
+       (rw sw sm se)
 
 over : Picture -> Picture -> Picture
 over p1 p2 = 
