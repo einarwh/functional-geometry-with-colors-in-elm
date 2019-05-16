@@ -16,8 +16,10 @@ turn : Picture -> Picture
 turn p = turnLens >> p
 
 times : Int -> (a -> a) -> (a -> a)
-times n fn = identity
-
+times n fn =
+  if n < 1 then identity
+  else fn >> times (n - 1) fn
+  
 turns : Int -> (Picture -> Picture)
 turns n = times n turn 
 

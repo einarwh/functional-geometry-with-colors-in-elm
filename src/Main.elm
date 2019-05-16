@@ -5,21 +5,18 @@ import Lens exposing (..)
 import Picture exposing (..)
 import Fish exposing (fishShapes)
 import Fitting exposing (createPicture)
-import Rendering exposing (toSvg, toSvgWithBoxes)
-import Svg exposing (Svg)
 import Html exposing (Html)
-import Decor exposing (decorate)
+import Decor exposing (render)
 
 main : Html msg
 main = 
   let 
-    box = { a = { x = 100.0, y = 100.0 }
-          , b = { x = 300.0, y = 0.0 }
-          , c = { x = 0.0, y = 300.0 } }
+    box = { a = { x = 100.0, y = 50.0 }
+          , b = { x = 400.0, y = 0.0 }
+          , c = { x = 0.0, y = 400.0 } }
     lens = (box, Blackish)
     fish = createPicture fishShapes
   in     
-    lens |> squareLimit 4 fish 
-         |> toSvgWithBoxes (500, 500) [ box ]
-         |> decorate
+    lens |> squareLimit 4 fish
+         |> render [ ]
  

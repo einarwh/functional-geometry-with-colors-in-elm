@@ -1,8 +1,11 @@
-module Decor exposing (decorate)
+module Decor exposing (render)
 
+import Box exposing (Box)
+import Picture exposing (Rendering)
 import Svg exposing (Svg)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
+import Rendering exposing (toSvg, toSvgWithBoxes)
 
 decorate : Svg msg -> Html msg 
 decorate svg = 
@@ -19,4 +22,13 @@ decorate svg =
           [ text "@einarwh" ] 
     body = div [ style "padding" "50px" ] [ svg ]
   in 
-    div [] [ body, footer ]
+    div [ ] [ body, footer ]
+
+render : List Box -> Rendering -> Html msg 
+render boxes rendering = 
+  let 
+    bounds = (500, 500)
+  in 
+    rendering 
+    |> toSvgWithBoxes bounds boxes
+    |> decorate  

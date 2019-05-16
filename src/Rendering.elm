@@ -50,17 +50,6 @@ toPolylineElement style pts =
       , fill "None"
       , points s ] []
 
---
---let strokeWidth = getStrokeWidthFromStyle style.stroke
---      let (strokeColor, sw) = 
---        match style.stroke with 
---        | Some stroke -> getStrokePen strok
---       | None -> ("none", strokeWidth)
---      let fillColor = 
---        match style.fill with 
---        | Some fill -> getFillBrush fill
---| None -> "none"
-
 getStrokePen : StrokeStyle -> (String, Float)
 getStrokePen { strokeWidth, strokeColor } = 
   let 
