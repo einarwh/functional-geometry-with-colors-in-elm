@@ -52,23 +52,23 @@ toPolylineElement style pts =
 
 --#011f4b • #03396c • #005b96 • #6497b1 • #b3cde0
 
+toStyleColorString : StyleColor -> String 
+toStyleColorString color = 
+  case color of 
+    B -> "black" 
+    G -> "grey"
+    W -> "white"
+
 getStrokePen : StrokeStyle -> (String, Float)
 getStrokePen { strokeWidth, strokeColor } = 
   let 
-    color = 
-      case strokeColor of 
-        B -> "black" 
-        G -> "grey"
-        W -> "white"
+    color = toStyleColorString strokeColor
   in 
     (color, strokeWidth)
 
 getFillBrush : FillStyle -> String
 getFillBrush { fillColor } = 
-  case fillColor of
-    B -> "black" 
-    G -> "grey"
-    W -> "white"
+  toStyleColorString fillColor
 
 toCurveElement : Style -> Vector -> Vector -> Vector -> Vector -> Svg msg
 toCurveElement style pt1 pt2 pt3 pt4 = 
